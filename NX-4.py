@@ -11,7 +11,7 @@ class NX:
         self.zonepins = []
         for input in self.config['inputs']:
             if input['pin'] == 3:
-                self.siren = gpiozero.Buzzer(input)
+                self.siren = gpiozero.Buzzer(input['pin'])
         for zone in self.config['zones']:
             self.zonepins.append(gpiozero.Button(zone['pin']))
     def get_zone(self, zone: int):
@@ -27,6 +27,8 @@ class NX:
     
     def alertzone(self):
         while True:
+            if not self.armed:
+                return 
             for i, zone in enumerate(self.zonepins):
                 if zone.is_pressed:
                     if "bypassed" in self.config['zones'][i+1]['flags'] or "partial" in self.config['zones'][i+1]['flags']:
@@ -46,7 +48,7 @@ class NX:
         input_received = threading.Event()
 
         def wait_for_enter():
-            input("Press Enter to simulate button press...\n")
+            input("Press Enter to acknolodge alarm...\n")
             input_received.set()
 
         thread = threading.Thread(target=wait_for_enter)
@@ -70,9 +72,13 @@ class NX:
         if self.armed:
             return {'status': 400, 'body': 'The system is already armed'}
         threading.Thread(target=self.alertzone).run()
+        self.armed = True
     def disarm(self):
         if not self.armed:
             return {'status': 400, 'body': 'The system is already disarmed'}
+        self.armed = False
     def codepad_send(self, codepad_interface: str, codepad_id: str | int, data: dict) -> None:
         print("""Not configured""")
 
+panel = NX()
+panel.arm()
