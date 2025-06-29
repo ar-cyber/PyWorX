@@ -1,5 +1,6 @@
 {
     "name": "Mypanel",
+    "timeout": 15,
     "zones": [
         {
             "zone": 1,
