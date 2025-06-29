@@ -1,0 +1,27 @@
+{
+    "name": "Mypanel",
+    "zones": [
+        {
+            "zone": 1,
+            "pin": 4,
+            "type": "none",
+            "flags": [
+                "partial",
+                "entryexit"
+            ]
+        }
+        
+    ],
+    "inputs": [
+        {
+            "type": "siren",
+            "pin": 3
+        }
+    ],
+    "codepads": [
+        {
+            "id": "1",
+            "type": "rest"
+        }
+    ]
+}
