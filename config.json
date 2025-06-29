@@ -5,7 +5,7 @@
         {
             "zone": 1,
             "pin": 4,
-            "type": "none",
+            "type": "switch",
             "flags": [
                 "partial",
                 "entryexit"
