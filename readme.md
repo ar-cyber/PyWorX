@@ -21,7 +21,7 @@ This is the sample JSON config with comments:
 */
 {
     "name": "Mypanel",
-    "timeout" 15, // default timeout interval
+    "timeout": 15, // default timeout interval
     "zones": [
 
         /* Available values for 'type'
